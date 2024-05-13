@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import AWS from "aws-sdk";
 import ytschema from "../model/ytschema.js";
 
+process.env.YTDL_NO_UPDATE = 1;
+
 dotenv.config();
 
 const s3 = new AWS.S3({
