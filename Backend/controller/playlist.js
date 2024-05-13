@@ -48,7 +48,7 @@ const api = async (item, index) => {
         return await uploadfile(
           {
             Body: download,
-            Bucket: "songdb-web",
+            Bucket: "aswin-testcase",
             Key: item,
             ContentType: "audio/mpeg",
             ACL: "public-read",
