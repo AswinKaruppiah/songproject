@@ -38,7 +38,7 @@ function Input() {
               });
             } else {
               await axios
-                .post("https://songproject-6osu.onrender.com/getplaylist", {
+                .post("http://localhost:3000/getplaylist", {
                   data: query,
                 })
                 .then((response) => {

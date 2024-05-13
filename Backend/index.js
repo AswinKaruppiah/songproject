@@ -32,7 +32,7 @@ app.use(cors({ credentials: true, origin: true }));
 
 app.use("/", Playlist);
 
-app.listen(8800, async () => {
+app.listen(process.env.port, async () => {
   await connect();
   console.log("sever start");
 });
