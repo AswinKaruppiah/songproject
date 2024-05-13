@@ -9,7 +9,7 @@ dotenv.config();
 const s3 = new AWS.S3({
   accessKeyId: process.env.accessKeyId,
   secretAccessKey: process.env.secretAccessKey,
-  region: "ap-south-1",
+  // region: "ap-south-1",
 });
 
 export const uploadfile = async (params, item, index) => {
@@ -21,6 +21,7 @@ export const uploadfile = async (params, item, index) => {
       return data;
     })
     .catch((err) => {
+      console.log(params);
       console.log(`${index}--------err in AWS uploaded------${item}`);
       console.log(err);
       return { name: item, error: `err in AWS uploaded------${item}` };
