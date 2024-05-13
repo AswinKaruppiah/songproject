@@ -46,6 +46,7 @@ const api = async (item, index) => {
         );
         ytid = res.data.items[0].id.videoId;
         img = res.data.items[0].snippet.thumbnails;
+        console.log(download);
         return await uploadfile(
           {
             Body: download,
