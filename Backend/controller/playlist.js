@@ -22,6 +22,7 @@ export const uploadfile = async (params, item, index) => {
     })
     .catch((err) => {
       console.log(`${index}--------err in AWS uploaded------${item}`);
+      console.log(err);
       return { name: item, error: `err in AWS uploaded------${item}` };
     });
 };
