@@ -75,6 +75,7 @@ const api = async (item, index) => {
             }
           })
           .catch((err) => {
+            console.log(err, "test");
             console.log(`${index}--------err in AWS uploaded------${item}`);
             return {
               name: item,
