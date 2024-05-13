@@ -78,7 +78,7 @@ const Controls = ({
   }, [volume, audioRef, muteVolume]);
 
   return (
-    <div className="flex justify-between flex-wrap items-center p-6 ">
+    <div className="flex justify-between flex-wrap items-center pb-6 ">
       <div className="flex justify-center gap-4  items-center">
         <button onClick={handlePrevious}>
           <FaFastBackward size={"1.5rem"} color="#ff6321" />

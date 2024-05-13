@@ -34,38 +34,55 @@ function Mp4({ data }) {
           className={` aspect-video w-full rounded-2xl`}
         />
       </div>
-      <div>
+      <div className="h-[535px]  overflow-hidden  mp overflow-y-scroll">
         {data &&
           data.map((item, index) => (
             <div
               key={index}
-              className={`flex gap-4 py-2  justify-start items-center cursor-pointer transition-all duration-150 px-3 rounded-lg ${
-                yt_id === item.yt_id && "bg-[#363333]"
+              onClick={() => {
+                setyt_id(item.yt_id);
+                handleClick();
+                console.log(item.yt_id);
+              }}
+              className={`flex gap-4 py-2 mb-2  justify-start items-center cursor-pointer transition-all duration-150 px-3 rounded-lg ${
+                yt_id === item.yt_id
+                  ? item.yt_id === undefined
+                    ? null
+                    : "bg-[#363333]"
+                  : null
               } hover:bg-[#363333]`}
             >
               <div
                 key={index}
-                onClick={() => {
-                  setyt_id(item.yt_id);
-                  handleClick();
-                }}
                 className="flex gap-4 py-2  justify-start items-center cursor-pointer "
               >
                 {yt_id === item.yt_id ? (
-                  <FaPlay color="#ff6321" />
+                  item.yt_id === undefined ? (
+                    <h3 className="font-poppins_light text-gray-300">
+                      {index + 1}
+                    </h3>
+                  ) : (
+                    <FaPlay color="#ff6321" />
+                  )
                 ) : (
                   <h3 className="font-poppins_light text-gray-300">
                     {index + 1}
                   </h3>
                 )}
 
-                <h1
-                  className={`font-poppins_regular ${
-                    yt_id === item.yt_id ? "text-custom_orange" : "text-white"
-                  } `}
-                >
-                  {item.name.replace("video song", "")}
-                </h1>
+                {item.error ? (
+                  <h1 className={`font-poppins_regular text-red-600 `}>
+                    {item.error.replace("video song", "")}
+                  </h1>
+                ) : (
+                  <h1
+                    className={`font-poppins_regular ${
+                      yt_id === item.yt_id ? "text-custom_orange" : "text-white"
+                    } `}
+                  >
+                    {item.name.replace("video song", "")}
+                  </h1>
+                )}
               </div>
             </div>
           ))}

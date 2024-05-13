@@ -24,7 +24,7 @@ function Input() {
     setinputerror();
     if (link) {
       var sp_link = link.split("/");
-      // setlink("");
+      setlink("");
       if (sp_link[4]) {
         sp_link = sp_link[4].split("?");
         setloading(true);
@@ -38,7 +38,7 @@ function Input() {
               });
             } else {
               await axios
-                .post("https://songproject-yq5p.onrender.com/getplaylist", {
+                .post("http://localhost:8800/getplaylist", {
                   data: query,
                 })
                 .then((response) => {
@@ -47,6 +47,7 @@ function Input() {
                   setCurrentTrack(response.data[0]);
                   setTrackIndex(0);
                   setData(response.data);
+
                   setloading(false);
                 })
                 .catch((err) => {
@@ -78,27 +79,44 @@ function Input() {
   };
 
   return (
-    <div>
-      <h1 className="text-5xl  pt-4 pb-8 text-custom_orange font-poppins_regular">
-        Playlist Link
+    <div className="flex h-screen justify-center items-center flex-col">
+      <h1 className="text-5xl sm:text-7xl text-center  pb-8 text-custom_orange font-poppins_medium">
+        Paste Your playlist <br /> Link
       </h1>
-      <div className="flex  flex-row justify-center items-center">
-        <input
-          type="url"
-          placeholder="Spotify Playlist Url"
-          value={link}
-          className={`px-7 w-full py-3 rounded-3xl focus:outline-none border-custom_orange  border-2 bg-transparent text-white `}
-          onChange={(e) => setlink(e.target.value)}
-        />
+
+      <input
+        type="url"
+        placeholder="Spotify Playlist Url"
+        value={link}
+        className={`px-7 sm:w-1/2 w-full py-3  rounded-3xl mt-5 mb-10 focus:outline-none border-custom_orange  border-2 bg-transparent text-white `}
+        onChange={(e) => setlink(e.target.value)}
+      />
+
+      {/* <button
+        className={`px-7 ${
+          loading ? "sm:w-1/4 w-2/5" : "w-40 bg-custom_orange"
+        }   duration-500 font-poppins_light text-white px-7 py-3 rounded-3xl sm:mx-4 hover:bg-orange-700 `}
+        onClick={() => (loading ? null : split_link())}
+      > */}
+      {!loading && (
         <button
-          className={`px-7 ${
-            loading ? "sm:w-1/4 w-2/5" : "w-40 bg-custom_orange"
-          }   duration-500 font-poppins_light text-white px-7 py-3 rounded-3xl sm:mx-4 hover:bg-orange-700 `}
+          className=" duration-500 bg-custom_orange  font-poppins_light text-white px-7 py-3 rounded-3xl sm:mx-4 hover:bg-orange-700 "
           onClick={() => (loading ? null : split_link())}
         >
-          {loading ? <div className="loader-line w-full" /> : "Search"}
+          Import Playlist
+          {/* {loading ? <div className="loader-line w-full" /> : "Import Playlist"} */}
         </button>
-      </div>
+      )}
+
+      {loading && (
+        <div className="w-full flex flex-col justify-center items-center">
+          <h1 className="text-3xl sm:text-5xl  text-center  pb-8 text-orange-50 font-poppins_regular">
+            Importing your songs
+          </h1>
+          <div className="loader-line w-[80%] sm:w-2/3" />
+        </div>
+      )}
+
       {inputerror && (
         <h1 className="pt-3 px-4 font-poppins_regular text-lg text-red-600">
           {inputerror.error}

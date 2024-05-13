@@ -13,17 +13,21 @@ export const List = ({ data, handleClick }) => {
     setTrackIndex,
   } = useContext(StateContext);
   return (
-    <div>
+    <div className="h-[535px]   overflow-hidden scroll mp overflow-y-scroll">
       {data.map((item, index) => (
         <div
           key={index}
-          className={`flex gap-4 py-2  justify-start items-center cursor-pointer transition-all duration-150 px-3 rounded-lg ${
+          className={`flex gap-4 py-4 mb-2  justify-start items-center cursor-pointer transition-all duration-150 px-3 rounded-lg ${
             trackIndex === index && "bg-[#363333]"
           } hover:bg-[#363333]`}
           onClick={() => {
-            setCurrentTrack(data[index]);
-            setTrackIndex(index);
-            handleClick();
+            if (data[index]?.error) {
+              return null;
+            } else {
+              setCurrentTrack(data[index]);
+              setTrackIndex(index);
+              handleClick();
+            }
           }}
         >
           {trackIndex === index ? (
@@ -47,13 +51,19 @@ export const List = ({ data, handleClick }) => {
             <h3 className="font-poppins_light text-gray-300">{index + 1}</h3>
           )}
 
-          <h1
-            className={`font-poppins_regular ${
-              trackIndex === index ? "text-custom_orange" : "text-white"
-            } `}
-          >
-            {item.name.replace("video song", "")}
-          </h1>
+          {item.error ? (
+            <h1 className={`font-poppins_regular text-red-600 `}>
+              {item.error.replace("video song", "")}
+            </h1>
+          ) : (
+            <h1
+              className={`font-poppins_regular ${
+                trackIndex === index ? "text-custom_orange" : "text-white"
+              } `}
+            >
+              {item.name.replace("video song", "")}
+            </h1>
+          )}
         </div>
       ))}
     </div>

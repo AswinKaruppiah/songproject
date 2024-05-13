@@ -9,12 +9,13 @@ function Mp3({ data }) {
     ref.current?.scrollIntoView();
   };
   return (
-    <div ref={ref} className="grid lg:grid-cols-3 gap-4 w-full sm:p-5 pt-5 ">
-      <div className="lg:col-span-2">
-        <AudioPlayer tracks={data} />
+    <div ref={ref} className="grid lg:grid-cols-6 gap-4 w-full sm:p-5 pt-5 ">
+      <div className="lg:col-start-1 col-span-4">
+        {data[0].error ? null : <AudioPlayer tracks={data} />}
       </div>
-
-      <List data={data} handleClick={handleClick} />
+      <div className="lg:col-start-5 col-span-6">
+        <List data={data} handleClick={handleClick} />
+      </div>
     </div>
   );
 }

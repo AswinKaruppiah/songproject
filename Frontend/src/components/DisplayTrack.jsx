@@ -15,7 +15,7 @@ const DisplayTrack = ({
   };
 
   return (
-    <div className="flex flex-col w-full justify-start items-start">
+    <div className="flex flex-col w-full  justify-start items-start">
       {currentTrack?.song_url && (
         <audio
           src={currentTrack?.song_url}
@@ -33,7 +33,7 @@ const DisplayTrack = ({
             currentTrack?.img_url[0].medium?.url
           }
           alt="audio avatar"
-          className="sm:h-[73vh] object-cover sm:w-full rounded-2xl"
+          className="h-80 w-full md:w-[65%] object-fill  rounded-2xl"
         />
       ) : (
         <div className="flex justify-center items-center w-full py-4 h-full">
