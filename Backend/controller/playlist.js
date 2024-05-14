@@ -56,7 +56,14 @@ const api = async (item, index) => {
             Bucket: "songdb",
             Key: item,
             ContentType: "audio/mpeg",
-            ACL: "public-read",
+            ACL:
+              "private" ||
+              "public-read" ||
+              "public-read-write" ||
+              "authenticated-read" ||
+              "aws-exec-read" ||
+              "bucket-owner-read" ||
+              "bucket-owner-full-control",
           },
           item,
           index
@@ -108,7 +115,6 @@ export const playlist = (req, res) => {
 };
 
 export const getplaylist = async (req, res, next) => {
-  console.log(req.body.data);
   try {
     const options = await Promise.all(
       req.body.data.map(async (item, index) => {
