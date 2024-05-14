@@ -1,22 +1,22 @@
 import axios from "axios";
 import ytdl from "ytdl-core";
 import dotenv from "dotenv";
-import { AWS, PutObjectCommand } from "aws-sdk";
+import AWS from "aws-sdk";
 import ytschema from "../model/ytschema.js";
 
 process.env.YTDL_NO_UPDATE = 1;
 
 dotenv.config();
+AWS.config.update({ region: "ap-south-1" });
 
 const s3 = new AWS.S3({
-  accessKeyId: process.env.accessKeyId,
-  secretAccessKey: process.env.secretAccessKey,
-  region: "ap-south-1",
+  credentials: {
+    accessKeyId: process.env.accessKeyId,
+    secretAccessKey: process.env.secretAccessKey,
+  },
 });
 
 export const uploadfile = async (params, item, index) => {
-  const command = new PutObjectCommand(params);
-  await s3.send(command);
   return await s3
     .upload(params)
     .promise()
@@ -58,14 +58,7 @@ const api = async (item, index) => {
             Bucket: "songdb",
             Key: item,
             ContentType: "audio/mpeg",
-            ACL:
-              "private" ||
-              "public-read" ||
-              "public-read-write" ||
-              "authenticated-read" ||
-              "aws-exec-read" ||
-              "bucket-owner-read" ||
-              "bucket-owner-full-control",
+            ACL: "public-read",
           },
           item,
           index
