@@ -1,7 +1,7 @@
 import axios from "axios";
 import ytdl from "ytdl-core";
 import dotenv from "dotenv";
-import AWS from "aws-sdk";
+import { AWS, PutObjectCommand } from "aws-sdk";
 import ytschema from "../model/ytschema.js";
 
 process.env.YTDL_NO_UPDATE = 1;
@@ -15,6 +15,8 @@ const s3 = new AWS.S3({
 });
 
 export const uploadfile = async (params, item, index) => {
+  const command = new PutObjectCommand(params);
+  await s3.send(command);
   return await s3
     .upload(params)
     .promise()
