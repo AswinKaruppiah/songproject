@@ -108,6 +108,7 @@ export const playlist = (req, res) => {
 };
 
 export const getplaylist = async (req, res, next) => {
+  console.log(req.body.data);
   try {
     const options = await Promise.all(
       req.body.data.map(async (item, index) => {
