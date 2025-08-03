@@ -38,12 +38,12 @@ function Input() {
               });
             } else {
               await axios
-                .post("https://songproject-8n5n.onrender.com/getplaylist", {
+                .post("http://localhost:3000/getplaylist", {
                   data: query,
                 })
                 .then((response) => {
                   setquery([]);
-                  console.log(response.data);
+                  // console.log(response.data);
                   setCurrentTrack(response.data[0]);
                   setTrackIndex(0);
                   setData(response.data);

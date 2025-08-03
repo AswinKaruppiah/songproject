@@ -7,7 +7,7 @@ import ytschema from "../model/ytschema.js";
 process.env.YTDL_NO_UPDATE = 1;
 
 dotenv.config();
-AWS.config.update({ region: "ap-south-1" });
+AWS.config.update({ region: "ap-southeast-2" });
 
 const s3 = new AWS.S3({
   credentials: {
@@ -55,7 +55,7 @@ const api = async (item, index) => {
         return await uploadfile(
           {
             Body: download,
-            Bucket: "songdb",
+            Bucket: "spotsyncdb",
             Key: item,
             ContentType: "audio/mpeg",
             ACL: "public-read",
