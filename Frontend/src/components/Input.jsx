@@ -38,7 +38,7 @@ function Input() {
               });
             } else {
               await axios
-                .post("https://songproject-seven.vercel.app//getplaylist", {
+                .post("https://songproject-seven.vercel.app/getplaylist", {
                   data: query,
                 })
                 .then((response) => {
