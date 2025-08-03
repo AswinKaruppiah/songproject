@@ -10,7 +10,7 @@ export const fetchdata = async (id, query, setquery) => {
       offset: "0",
     },
     headers: {
-      "x-rapidapi-key": "0bccf3a49cmshdb470e12fe5fc79p1492e7jsn48f4dd2b5763",
+      "x-rapidapi-key": import.meta.env.VITE_API_KEY,
       "x-rapidapi-host": "spotify-downloader9.p.rapidapi.com",
     },
   };
